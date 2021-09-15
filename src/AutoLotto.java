@@ -1,9 +1,9 @@
 import java.util.*;
 
 class InputView {
-	private int money;
-	private int count;
-	private int change;
+	private int money;		// 지불한 돈.
+	private int count;		// 로또 개수.
+	private int change;		// 거스름 돈.
 	Scanner sc = new Scanner(System.in);
 
 // 금액을 입력하는 메소드.
@@ -22,6 +22,7 @@ class InputView {
 
 class ResultView {
 	private InputView input;
+	private List lottos;	// 여러 장의 로또들의 묶음.
 
 	public ResultView(InputView input) {
 		this.input = input;
@@ -30,6 +31,15 @@ class ResultView {
 // 로또 개수 출력.	
 	public void showCount() {
 		System.out.println(input.getCount() + "개를 구매했습니다.");
+	}
+
+// 로또 번호들 출력.
+	public void showLottoNumbers(List lottos) {
+		this.lottos = lottos;
+		Iterator it = lottos.iterator();
+		while (it.hasNext()) {
+			System.out.println(it.next());
+		}
 	}
 }
 
@@ -72,6 +82,7 @@ public class AutoLotto {
 
 		Lotto lotto = new Lotto(input);					// 로또 번호들 생성.
 		
-		result.showCount();
+		result.showCount();								// 로또 개수 출력.
+		result.showLottoNumbers(lotto.getLottos());		// 로또 번호들 출력.
 	}
 }
