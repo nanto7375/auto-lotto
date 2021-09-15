@@ -32,6 +32,8 @@ class InputView {
 class ResultView {
 	private InputView input;
 	private List lottos;	// 여러 장의 로또들의 묶음.
+	private int[] match;	// match[i] : 번호가 i개 맞는 로또의 개수.
+	private final int[] PRIZE = {0, 0, 0, 5000, 50000, 1500000, 2000000000};
 
 	public ResultView(InputView input) {
 		this.input = input;
@@ -50,6 +52,29 @@ class ResultView {
 			System.out.println(it.next());
 		}
 	}
+
+	public void showResult(int[] match) {
+		this.match = match;
+
+		System.out.println();
+		System.out.println("당첨 통계");
+		System.out.println("-------");
+		System.out.println("3개 일치 (" + PRIZE[3] + "원) - " + match[3] + "개");
+		System.out.println("4개 일치 (" + PRIZE[4] + "원) - " + match[4] + "개");
+		System.out.println("5개 일치 (" + PRIZE[5] + "원) - " + match[5] + "개");
+		System.out.println("6개 일치 (" + PRIZE[6] + "원) - " + match[6] + "개");
+		System.out.println("총 수익률은 " + getRatio() + "입니다.");
+	}
+
+	private double getRatio() {
+		int sum = 0;
+		for (int i = 3; i <= 6; i++) {
+			sum += match[i] * PRIZE[i];
+		}
+
+		double result = (double)sum / input.getMoney();
+		return Math.round(result * 100) / 100.0;
+	}
 }
 
 class Lotto {
@@ -67,6 +92,7 @@ class Lotto {
 			lottos.add(lotto);
 		}
 	}
+	
 // 새로운 로또 번호를 위해 numbers에 저장되는 주소를 바꿔준다.	
 	private void setNumbers() {
 		numbers = new ArrayList(45);
@@ -81,7 +107,7 @@ class Lotto {
 class Match {
 	private List lottos;
 	private List answer;	// 지난 주 당첨번호.
-	private int[] match = new int[7];
+	private int[] match = new int[7];	// match[i] : 번호가 i개 맞는 로또의 개수.
 
 	public Match(Lotto lotto, String answer) {
 		lottos = lotto.getLottos();
@@ -146,6 +172,7 @@ public class AutoLotto {
 
 		input.setAnswer();								// 지난 주 당첨번호 입력.
 		
-		Match match = new Match(lotto, input.getAnswer());
+		Match match = new Match(lotto, input.getAnswer());	// 당첨번호 확인.
+		result.showResult(match.getMatch());			// 통계 보기.
 	}
 }
