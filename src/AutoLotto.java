@@ -17,21 +17,21 @@ class InputView {
 		change = money % 1000;
 	}
 	
-	public int getCount() { return count; }
-	public int getMoney() { return money; }
-
+// 지난 주 당첨번호를 입력하는 메소드.
 	public void setAnswer() {
 		System.out.println();
 		System.out.println("지난 주 당첨번호를 입력해주세요.");
 
 		answer = sc.nextLine();
 	}
+	
+	public int getCount() { return count; }
+	public int getMoney() { return money; }
 	public String getAnswer() { return answer; }
 }
 
 class ResultView {
 	private InputView input;
-	private List lottos;	// 여러 장의 로또들의 묶음.
 	private int[] match;	// match[i] : 번호가 i개 맞는 로또의 개수.
 	private final int[] PRIZE = {0, 0, 0, 5000, 50000, 1500000, 2000000000};
 
@@ -46,7 +46,6 @@ class ResultView {
 
 // 로또 번호들 출력.
 	public void showLottoNumbers(List lottos) {
-		this.lottos = lottos;
 		Iterator it = lottos.iterator();
 		while (it.hasNext()) {
 			System.out.println(it.next());
@@ -105,12 +104,12 @@ class Lotto {
 }
 
 class Match {
-	private List lottos;
+	private List lottos;	// 로또 묶음.
 	private List answer;	// 지난 주 당첨번호.
 	private int[] match = new int[7];	// match[i] : 번호가 i개 맞는 로또의 개수.
 
-	public Match(Lotto lotto, String answer) {
-		lottos = lotto.getLottos();
+	public Match(List lottos, String answer) {
+		this.lottos = lottos;
 		this.answer = convertToList(answer);
 
 		setResult();
@@ -172,7 +171,7 @@ public class AutoLotto {
 
 		input.setAnswer();								// 지난 주 당첨번호 입력.
 		
-		Match match = new Match(lotto, input.getAnswer());	// 당첨번호 확인.
+		Match match = new Match(lotto.getLottos(), input.getAnswer());	// 당첨번호 확인.
 		result.showResult(match.getMatch());			// 통계 보기.
 	}
 }
