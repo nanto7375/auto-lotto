@@ -6,6 +6,7 @@ class InputView {
 	private int change;
 	Scanner sc = new Scanner(System.in);
 
+// 금액을 입력하는 메소드.
 	public void setMoney() {
 		System.out.println("구입 금액을 입력해 주세요.");
 		String tmp = sc.nextLine();
@@ -32,7 +33,7 @@ public class AutoLotto {
 		InputView input = new InputView();
 		ResultView result = new ResultView(input);
 
-		input.setMoney();
+		input.setMoney();								// 금액 지불하기.
 		if (input.getCount() == 0) {
 			System.out.println("로또를 구입하지 못했습니다.");
 			return;
