@@ -158,20 +158,20 @@ public class AutoLotto {
 		InputView input = new InputView();
 		ResultView result = new ResultView(input);
 
-		input.setMoney();								// 금액 지불하기.
+		input.setMoney();		// 금액 지불하기.
 		if (input.getCount() == 0) {
 			System.out.println("로또를 구입하지 못했습니다.");
 			return;
 		}
 
-		Lotto lotto = new Lotto(input);					// 로또 번호들 생성.
+		Lotto lotto = new Lotto(input);		// 로또 번호들 생성.
 		
-		result.showCount();								// 로또 개수 출력.
+		result.showCount();		// 로또 개수 출력.
 		result.showLottoNumbers(lotto.getLottos());		// 로또 번호들 출력.
 
-		input.setAnswer();								// 지난 주 당첨번호 입력.
+		input.setAnswer();		// 지난 주 당첨번호 입력.
 		
 		Match match = new Match(lotto.getLottos(), input.getAnswer());	// 당첨번호 확인.
-		result.showResult(match.getMatch());			// 통계 보기.
+		result.showResult(match.getMatch());		// 통계 보기.
 	}
 }
