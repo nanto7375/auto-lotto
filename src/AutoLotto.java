@@ -26,6 +26,11 @@ class ResultView {
 	public ResultView(InputView input) {
 		this.input = input;
 	}
+	
+// 로또 개수 출력.	
+	public void showCount() {
+		System.out.println(input.getCount() + "개를 구매했습니다.");
+	}
 }
 
 class Lotto {
@@ -66,5 +71,7 @@ public class AutoLotto {
 		}
 
 		Lotto lotto = new Lotto(input);					// 로또 번호들 생성.
+		
+		result.showCount();
 	}
 }
