@@ -78,6 +78,45 @@ class Lotto {
 	public List getLottos() { return lottos; }
 }
 
+class Match {
+	private List lottos;
+	private List answer;	// 지난 주 당첨번호.
+	private int[] match = new int[7];
+
+	public Match(Lotto lotto, String answer) {
+		lottos = lotto.getLottos();
+		this.answer = convertToList(answer);
+
+		setResult();
+	}
+	
+// 입력 받은 당첨번호를 List형식으로 변경하기 위한 메소드.
+	private List convertToList(String str) {
+		StringTokenizer st = new StringTokenizer(str, ", ");
+
+		List list = new ArrayList(st.countTokens());		
+		while(st.hasMoreTokens()) {
+			list.add(Integer.parseInt(st.nextToken()));
+		}
+
+		return list;
+	}
+
+// 당첨 확인을 위하여 로또묶음에서 하나씩 꺼내는 메소드.
+	private void setResult() {
+		for (int i = 0 ; i < lottos.size() ; i++) {
+			match[getMatch((List)lottos.get(i))]++;
+		}
+	}
+
+	private int getMatch(List numbers) {
+		int count = 0;
+
+		return count;
+	}
+	
+}
+
 public class AutoLotto {
 	public static void main(String[] args) {
 		InputView input = new InputView();
@@ -95,5 +134,7 @@ public class AutoLotto {
 		result.showLottoNumbers(lotto.getLottos());		// 로또 번호들 출력.
 
 		input.setAnswer();								// 지난 주 당첨번호 입력.
+		
+		Match match = new Match(lotto, input.getAnswer());
 	}
 }
