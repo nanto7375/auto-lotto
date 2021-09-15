@@ -108,13 +108,24 @@ class Match {
 			match[getMatch((List)lottos.get(i))]++;
 		}
 	}
-
+// 선택한 로또의 번호들을 하나씩 추출하는 메소드.
 	private int getMatch(List numbers) {
 		int count = 0;
+		for (int i = 0; i < numbers.size(); i++) {
+			count += detailCheck((int)numbers.get(i));
+		}
 
 		return count;
 	}
-	
+
+// 당첨번호와 번호를 하나씩 비교하는 메소드.
+	private int detailCheck(int number) {
+		if (answer.contains(number)) return 1;
+
+		return 0;		
+	}
+
+	public int[] getMatch() { return match; }
 }
 
 public class AutoLotto {
