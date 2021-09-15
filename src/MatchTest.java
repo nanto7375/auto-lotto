@@ -28,13 +28,17 @@ class MatchTest {
 	void setResult() {
 		int[] match = new int[7];
 		ArrayList lottos = new ArrayList(6);
+		lottos.add(new ArrayList());		lottos.add(new ArrayList());
+		lottos.add(new ArrayList());		lottos.add(new ArrayList());
+		lottos.add(new ArrayList());		lottos.add(new ArrayList());
+		
 		for (int i = 0 ; i < 6 ; i++) {
 			match[getMatch((List)lottos.get(i))]++;
 		}
 	}
 
 	@Test
-	private int getMatch(List numbers) {
+	int getMatch(List numbers) {
 		int count = 0;
 		for (int i = 0; i < numbers.size(); i++) {
 			count += detailCheck((int)numbers.get(i));
@@ -44,7 +48,7 @@ class MatchTest {
 	}
 
 	@Test
-	private int detailCheck(int number) {
+	int detailCheck(int number) {
 		List answer = new ArrayList();
 		answer.add(1);		answer.add(2);
 		answer.add(3);		answer.add(4);
