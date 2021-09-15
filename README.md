@@ -1,5 +1,5 @@
 # auto-lotto
-자동 로또 구현하기 - src폴더 안의 AuttoLotto 파일.
+자동 로또 구현하기 - src폴더 안의 AutoLotto 파일.
 
 1. 금액 지불하기
 
