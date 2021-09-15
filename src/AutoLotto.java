@@ -1,10 +1,11 @@
 import java.util.*;
 
 class InputView {
+	Scanner sc = new Scanner(System.in);
 	private int money;		// 지불한 돈.
 	private int count;		// 로또 개수.
 	private int change;		// 거스름 돈.
-	Scanner sc = new Scanner(System.in);
+	private String answer;	// 당첨번호.
 
 // 금액을 입력하는 메소드.
 	public void setMoney() {
@@ -18,6 +19,14 @@ class InputView {
 	
 	public int getCount() { return count; }
 	public int getMoney() { return money; }
+
+	public void setAnswer() {
+		System.out.println();
+		System.out.println("지난 주 당첨번호를 입력해주세요.");
+
+		answer = sc.nextLine();
+	}
+	public String getAnswer() { return answer; }
 }
 
 class ResultView {
@@ -84,5 +93,7 @@ public class AutoLotto {
 		
 		result.showCount();								// 로또 개수 출력.
 		result.showLottoNumbers(lotto.getLottos());		// 로또 번호들 출력.
+
+		input.setAnswer();								// 지난 주 당첨번호 입력.
 	}
 }
